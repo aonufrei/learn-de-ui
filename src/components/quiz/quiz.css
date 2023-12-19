@@ -1,0 +1,71 @@
+.word-card {
+    min-height: calc(100vh * 0.7);
+    min-width: calc(100vw * 0.4);
+    border-radius: 20px;
+    background-color: var(--foreground-color);
+    padding: 35px 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.word-card_explanation {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 5px;
+    color: var(--font-color);
+    font-size: 20px;
+    text-align: left;
+}
+
+.word-card__title {
+    text-align: center;
+    color: var(--font-color);
+    font-size: 48px;
+    font-weight: 800;
+    text-shadow: var(--shadow-color) 0px 4px 10px;
+    margin: 0;
+    padding: 0;
+}
+
+.word-card__translation {
+    text-align: center;
+    font-family: "Montserrat Alternates", sans-serif;
+    color: var(--font-color);
+    font-size: 36px;
+    margin: 0;
+    padding: 0;
+}
+
+.word-card__cnt-button {
+    display: grid;
+    column-gap: 5px;
+    grid-template-columns: auto auto auto;
+    width: 100%;
+}
+
+.word-card__button {
+    outline: none;
+    font-size: 20px;
+    padding: 15px 50px;
+    background-color: var(--active-color);
+    transition: 0.3s all;
+}
+
+.word-card__button:focus {
+    outline: none;
+}
+
+.word-card__btn-active:hover {
+    background-color: var(--active-hover-color);
+}
+
+.word-card__btn-success {
+    background-color: var(--success-color);
+}
+
+.word-card__btn-failed {
+    background-color: var(--failure-color);
+}
