@@ -1,0 +1,11 @@
+.app-header {
+    position: sticky;
+    top: 0;
+    padding: 10px;
+    background-color: black;
+    margin-bottom: 40px;
+}
+
+.app-header__logo {
+    font-size: 24px;
+}

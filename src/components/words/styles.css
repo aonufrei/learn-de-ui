@@ -1,0 +1,41 @@
+.page-container {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.category-container {
+    display: grid;
+    row-gap: 5px;
+    grid-template-columns: auto;
+}
+
+.category {
+    display: block;
+    background-color: var(--foreground-color);
+    color: var(--font-color);
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: 0.3s all;
+}
+
+.category:hover {
+    transform: scale(1.02);
+    border-radius: 20px;
+}
+
+.category__name {
+    display: block;
+    text-align: left;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.category__description {
+    display: block;
+    text-align: left;
+}
+
+.category__amount {
+    display: block;
+    text-align: left;
+}

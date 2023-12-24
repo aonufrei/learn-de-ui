@@ -1,26 +1,32 @@
-import { useState } from "react"
 import "./App.css"
-import QuizApp from "./components/quiz/QuizApp"
+import { QuizProvider } from "./components/quiz/QuizApp"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import ResultsPage from "./components/quiz/ResultsPage"
+import CategoriesPage from "./components/words/CategoriesPage"
 
-const words = [
+const router = createBrowserRouter([
     {
-        word: "Katze",
-        final: "Die Katze",
-        correct: 1,
-        translation: "The cat",
+        path: "/words",
+        element: <CategoriesPage />,
     },
     {
-        word: "Hund",
-        final: "Der Hund",
-        correct: 0,
-        translation: "The dog",
+        path: "/words/:packid/quiz",
+        element: <QuizProvider />,
     },
-]
+    {
+        path: "/quiz/results",
+        element: <ResultsPage />,
+    },
+])
 
 function App() {
     return (
-        <div className="app-page">
-            <QuizApp words={words} />
+        <div>
+            <header className="app-header">
+                <span className="app-header__logo">Learn De articles!</span>
+            </header>
+            <RouterProvider router={router} />
+            {/* <QuizApp words={words} /> */}
         </div>
     )
 }
