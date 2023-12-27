@@ -1,0 +1,19 @@
+.page-container {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.response-container {
+    display: grid;
+    row-gap: 5px;
+    grid-template-columns: auto;
+}
+
+.response-card {
+    display: block;
+    background-color: var(--foreground-color);
+    color: var(--font-color);
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: 0.3s all;
+}

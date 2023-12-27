@@ -17,7 +17,12 @@ const WordCard = ({
         if (ended) {
             return
         }
-        onResponse(final, correct, id)
+        onResponse({
+            final: final,
+            translation: translation,
+            expected: correct,
+            actual: id,
+        })
         onOptionSel(id)
         onEnded(true)
     }

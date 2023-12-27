@@ -1,74 +1,31 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import "./quiz.css"
 import WordCard from "./WordCard"
 import { useNavigate, useParams } from "react-router-dom"
 
-
-const pack1 = [
-    {
-        word: "Katze",
-        final: "Die Katze",
-        correct: 1,
-        translation: "The cat",
-    },
-    {
-        word: "Hund",
-        final: "Der Hund",
-        correct: 0,
-        translation: "The dog",
-    },
-]
-
-
-const pack2 = [
-    {
-        word: "Tisch",
-        final: "Der Tisch",
-        correct: 0,
-        translation: "The table",
-    },
-    {
-        word: "Stuhl",
-        final: "Der Stuhl",
-        correct: 0,
-        translation: "The chair",
-    },
-]
-
-
-const pack3 = [
-    {
-        word: "Kässe",
-        final: "Der Kässe",
-        correct: 0,
-        translation: "The cheese",
-    },
-    {
-        word: "Kartofel",
-        final: "Die Kartofel",
-        correct: 1,
-        translation: "The potatoe",
-    },
-]
-
-const packSelect = {
-    1: pack1,
-    2: pack2,
-    3: pack3,
-}
+import {getWords} from '../../service/words'
 
 const QuizProvider = () => {
-    const { packid } = useParams()
-    return <QuizApp words={packSelect[parseInt(packid)]} />
+    const { topicid } = useParams()
+    return <QuizApp topicId={topicid} />
 }
 
-const QuizApp = ({ words }) => {
+const QuizApp = ({ topicId }) => {
     const [ended, setEnded] = useState(false)
     const [selArticle, setSelArticle] = useState(-1)
     const [wIndex, setWIndex] = useState(0)
     const navigate = useNavigate()
 
     const [responses, setResponses] = useState([])
+    const [words, setWords] = useState([])
+
+    useEffect(() => {
+        getWords(topicId).then(w => {
+            console.log(w)
+            setWords(w)
+        })
+        return () => "HALLO"
+    }, [])
 
     const onOptionSel = (id) => {
         if (ended) return
@@ -89,7 +46,7 @@ const QuizApp = ({ words }) => {
     }
 
     const endGame = () => {
-        navigate("/quiz/results")
+        navigate("/quiz/results", { state: {responses: [...responses]}})
     }
 
     const getWordsCounter = () => {
@@ -103,8 +60,8 @@ const QuizApp = ({ words }) => {
         return wIndex === words.length - 1
     }
 
-    const onResponse = (word, correct, actual) => {
-        setResponses([...responses, { word, correct, actual }])
+    const onResponse = (r) => {
+        setResponses([...responses, r])
     }
 
     return (

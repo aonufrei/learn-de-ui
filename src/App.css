@@ -4,6 +4,7 @@
     padding: 10px;
     background-color: black;
     margin-bottom: 40px;
+    z-index: 999;
 }
 
 .app-header__logo {
