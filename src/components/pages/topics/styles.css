@@ -1,15 +1,16 @@
 .page-container {
     margin-left: 10%;
     margin-right: 10%;
+    margin-bottom: 200px;
 }
 
-.category-container {
+.topics-container {
     display: grid;
     row-gap: 5px;
     grid-template-columns: auto;
 }
 
-.category {
+.topic {
     display: block;
     background-color: var(--foreground-color);
     color: var(--font-color);
@@ -18,24 +19,24 @@
     transition: 0.3s all;
 }
 
-.category:hover {
+.topic:hover {
     transform: scale(1.02);
     border-radius: 20px;
 }
 
-.category__name {
+.topic__name {
     display: block;
     text-align: left;
     font-size: 20px;
     font-weight: 600;
 }
 
-.category__description {
+.topic__description {
     display: block;
     text-align: left;
 }
 
-.category__amount {
+.topic__amount {
     display: block;
     text-align: left;
 }

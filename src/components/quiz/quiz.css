@@ -1,6 +1,5 @@
 .app-page {
     width: 100%;
-    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,7 +34,6 @@
     border-radius: 20px;
     background-color: var(--foreground-color);
     padding: 35px 20px;
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -80,7 +78,7 @@
 .word-card__button {
     outline: none;
     font-size: 20px;
-    padding: 15px 50px;
+    padding: 0.5em 1.2em;
     background-color: var(--active-color);
     transition: 0.3s all;
 }

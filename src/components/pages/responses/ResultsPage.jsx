@@ -1,11 +1,12 @@
 import React, { useEffect } from "react"
-import { useLocation } from "react-router-dom"
-import { determineArticle } from "../../../service/words"
-import './styles.css'
+import { Link, useLocation } from "react-router-dom"
+import { determineArticle } from "../../../service/APIService"
+import "./styles.css"
 
 const ResultsPage = () => {
     const { state } = useLocation()
     const responses = state.responses
+    const sourceUrl = state.sourceUrl
 
     useEffect(() => {
         console.log(responses)
@@ -35,12 +36,27 @@ const ResultsPage = () => {
         )
     }
 
-    return <div className="page-container">
-        <p>Your results</p>
-        {renderResponses()}
-        <button>Retry</button>
-        <button>To Topics</button>
-    </div>
+    return (
+        <div>
+            <div className="page-container">
+                {responses && <p>Your results</p>}
+                {renderResponses()}
+            </div>
+
+            <div className="nav-btns-container">
+                <Link to={sourceUrl}>
+                    <button className="nav-btn nav-btn__try-again">
+                        Try again
+                    </button>
+                </Link>
+                <Link to={'/words'}>
+                    <button className="nav-btn nav-btn__to-topics">
+                        Back to Topics
+                    </button>
+                </Link>
+            </div>
+        </div>
+    )
 }
 
 export default ResultsPage

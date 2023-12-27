@@ -17,3 +17,31 @@
     border-radius: 10px;
     transition: 0.3s all;
 }
+
+.nav-btns-container {
+    position: sticky;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    bottom: 30px;
+}
+
+.nav-btn {
+    padding: 20px 50px;
+    border: none;
+    border-radius: 999px;
+    transition: .3s all;
+}
+
+.nav-btn:hover {
+    transform: scale(1.1);
+}
+
+.nav-btn__try-again {
+    background-color: sandybrown;
+}
+
+.nav-btn__to-topics {
+    background-color: greenyellow;
+}

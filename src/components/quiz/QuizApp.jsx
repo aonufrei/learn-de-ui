@@ -3,7 +3,7 @@ import "./quiz.css"
 import WordCard from "./WordCard"
 import { useNavigate, useParams } from "react-router-dom"
 
-import {getWords} from '../../service/words'
+import { getWordsOfTopic } from "../../service/APIService"
 
 const QuizProvider = () => {
     const { topicid } = useParams()
@@ -20,7 +20,7 @@ const QuizApp = ({ topicId }) => {
     const [words, setWords] = useState([])
 
     useEffect(() => {
-        getWords(topicId).then(w => {
+        getWordsOfTopic(topicId).then((w) => {
             console.log(w)
             setWords(w)
         })
@@ -46,7 +46,12 @@ const QuizApp = ({ topicId }) => {
     }
 
     const endGame = () => {
-        navigate("/quiz/results", { state: {responses: [...responses]}})
+        navigate("/quiz/results", {
+            state: {
+                responses: [...responses],
+                sourceUrl: window.location.pathname,
+            },
+        })
     }
 
     const getWordsCounter = () => {

@@ -2,12 +2,12 @@ import "./App.css"
 import { QuizProvider } from "./components/quiz/QuizApp"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import ResultsPage from "./components/pages/responses/ResultsPage"
-import CategoriesPage from "./components/pages/topics/CategoriesPage"
+import TopicsPage from "./components/pages/topics/TopicsPage"
 
 const router = createBrowserRouter([
     {
         path: "/words",
-        element: <CategoriesPage />,
+        element: <TopicsPage />,
     },
     {
         path: "/words/:topicid/quiz",
