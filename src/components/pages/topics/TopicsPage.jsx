@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import "./styles.css"
 import { getAllTopics } from "../../../service/APIService"
+import BasicPage from "../BasicPage/BasicPage"
+import { Card } from "react-bootstrap"
 
 const TopicsPage = () => {
     const [topics, setTopics] = useState([])
@@ -26,24 +28,32 @@ const TopicsPage = () => {
     }, [])
 
     return (
-        <div className="page-container">
+        <BasicPage>
             <p>Select topic of words:</p>
             <div className="topics-container">
                 {topics.map((it, index) => (
                     <Link key={index} to={it.url}>
-                        <div className="topic">
-                            <span className="topic__name">{it.name}</span>
-                            <span className="topic__description">
-                                {it.description}
-                            </span>
-                            <span className="topic__amount">
-                                {it.amount}
-                            </span>
-                        </div>
+                        <Card>
+                            <Card.Body>
+                                <Card.Title>
+                                    <span className="topic__name">
+                                        {it.name}
+                                    </span>
+                                </Card.Title>
+                                <Card.Text>
+                                    <span className="topic__description">
+                                        {it.description}
+                                    </span>
+                                </Card.Text>
+                                <span className="topic__amount">
+                                    {it.amount}
+                                </span>
+                            </Card.Body>
+                        </Card>
                     </Link>
                 ))}
             </div>
-        </div>
+        </BasicPage>
     )
 }
 

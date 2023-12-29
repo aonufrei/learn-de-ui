@@ -1,6 +1,7 @@
 import React from "react"
 
 import "./quiz.css"
+import { Card } from "react-bootstrap"
 
 const WordCard = ({
     word,
@@ -39,7 +40,8 @@ const WordCard = ({
     }
 
     return (
-        <div className="word-card">
+        <Card>
+            <Card.Body>
             <span></span>
             <div>
                 <p className="word-card__title">{ended ? final : word}</p>
@@ -71,7 +73,8 @@ const WordCard = ({
                     </button>
                 </div>
             </div>
-        </div>
+            </Card.Body>
+        </Card>
     )
 }
 
