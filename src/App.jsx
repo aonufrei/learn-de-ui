@@ -6,8 +6,14 @@ import TopicsPage from "./components/pages/topics/TopicsPage"
 import Page from "./components/Basic/Page"
 import Header from "./components/Basic/Header"
 import Footer from "./components/Basic/Footer"
+import NotFoundPage from "./components/pages/not-found/NotFoundPage"
+import WelcomePage from "./components/pages/welcome/WelcomePage"
 
 const router = createBrowserRouter([
+    {
+        path: "/home",
+        element: <WelcomePage />,
+    },
     {
         path: "/words",
         element: <TopicsPage />,
@@ -20,17 +26,19 @@ const router = createBrowserRouter([
         path: "/quiz/results",
         element: <ResultsPage />,
     },
+    {
+        path: "*",
+        element: <NotFoundPage />,
+    },
 ])
 
 function App() {
     return (
-        <div className="top-and-bottom-layouts">
-            <>
+        <div className="app__container">
+            <div className="app__main">
                 <Header />
-                <Page>
-                    <RouterProvider router={router} />
-                </Page>
-            </>
+                <RouterProvider router={router} />
+            </div>
             <Footer />
         </div>
     )

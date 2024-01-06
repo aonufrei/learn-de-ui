@@ -4,7 +4,7 @@ import "./basic.css"
 
 const Footer = () => {
     return (
-        <footer className="app-bar bar-stick-to-bottom">
+        <footer className="app-bar">
             <div className="app-bar__container">
                 <span className="app-footer__title">Developed by @aonufrei</span>
             </div>

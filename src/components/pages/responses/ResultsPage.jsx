@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { determineArticle } from "../../../service/APIService"
 import "./styles.css"
+import Page from "../../Basic/Page"
 
 const ResultsPage = () => {
     const { state } = useLocation()
@@ -37,9 +38,8 @@ const ResultsPage = () => {
     }
 
     return (
-        <div>
-            <div className="page-container">
-                {responses && <p>Your results</p>}
+        <Page title={responses ? "Your results:" : undefined}>
+            <div>
                 {renderResponses()}
             </div>
 
@@ -49,13 +49,13 @@ const ResultsPage = () => {
                         Try again
                     </button>
                 </Link>
-                <Link to={'/words'}>
+                <Link to={"/words"}>
                     <button className="nav-btn nav-btn__to-topics">
                         Back to Topics
                     </button>
                 </Link>
             </div>
-        </div>
+        </Page>
     )
 }
 

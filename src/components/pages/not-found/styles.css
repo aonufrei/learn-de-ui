@@ -1,0 +1,14 @@
+.not-found__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.not-found__caption {
+    font-size: 56px;
+    color: var(--font-color);
+    font-weight: bold;
+    text-align: center;
+}

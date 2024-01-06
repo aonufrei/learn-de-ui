@@ -19,10 +19,14 @@
     --active-hover-color: #c2c2c2;
     --success-color: #54f076;
     --failure-color: #e7a4a4;
+    --btn-color: #5d3587;
+    --link-color: #5d3587;
 }
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 a {
@@ -78,10 +82,8 @@ button:focus-visible {
         background-color: #f9f9f9;
     }
 }
+
 html,
-body {
-    min-height: 100%;
-}
-body {
-    height: 100vh;
+body, #root {
+    min-height: 100vh;
 }

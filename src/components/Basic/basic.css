@@ -1,5 +1,5 @@
 :root {
-    --bar-height: 70px
+    --bar-height: 50px
 }
 
 .app-bar {
@@ -8,6 +8,11 @@
     width: 100%;
     padding-left: 150px;
     padding-right: 150px;
+}
+
+.header {
+    position: absolute;
+    top: 0;
 }
 
 .always-on-top {
@@ -28,18 +33,39 @@
 }
 
 .bar-stick-to-bottom {
-    position: absolute;
+    position: sticky;
     left: 0;
     bottom: 0;
     right: 0;
 }
 
 .app-basic-page {
-    height: 100%;
+    width: 100%;
     display: grid;
     grid-template-columns: 150px auto 150px;
+    color: var(--font-color);
 }
 
 .app-basic-page__content {
-    background-color: #fff3f8;
+    padding: 80px 40px 0px 40px;
+    margin-bottom: 80px;
+    /* background-color: #fff3f8; */
+    background-color: white;
+}
+
+.link {
+    text-decoration: underline;
+    color: var(--link-color);
+}
+
+.page__title {
+    padding-bottom: 20px;
+}
+
+.page__divider {
+    margin-bottom: 20px;
+}
+
+.article {
+    padding-bottom: 20px;
 }

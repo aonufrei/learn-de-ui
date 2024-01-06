@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import "../../Basic/basic.css"
 import "./styles.css"
 import { getAllTopics } from "../../../service/APIService"
+import Page from "../../Basic/Page"
 
 const TopicsPage = () => {
     const [topics, setTopics] = useState([])
@@ -26,33 +28,18 @@ const TopicsPage = () => {
     }, [])
 
     return (
-        <div className="page-container">
-            <h2>Words by Topics</h2>
-            <hr />
-            <p>Select the topic you are interested in:</p>
+        <Page title={"Words by Topics"}>
+            <p className="article">Select the topic you are interested in:</p>
             <ul style={{ color: "black" }}>
                 {topics.map((it, index) => (
                     <li>
-                        <Link key={index} to={it.url}>
+                        <Link className="link" key={index} to={it.url}>
                             {it.name}
                         </Link>
                     </li>
                 ))}
             </ul>
-            {/* <div className="topics-container">
-                {topics.map((it, index) => (
-                    <Link key={index} to={it.url}>
-                        <div className="topic">
-                            <span className="topic__name">{it.name}</span>
-                            <span className="topic__description">
-                                {it.description}
-                            </span>
-                            <span className="topic__amount">{it.amount}</span>
-                        </div>
-                    </Link>
-                ))}
-            </div> */}
-        </div>
+        </Page>
     )
 }
 

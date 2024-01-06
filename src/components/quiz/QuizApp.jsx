@@ -70,7 +70,7 @@ const QuizApp = ({ topicId }) => {
     }
 
     return (
-        <div className="app-page">
+        <div className="quiz-container">
             <WordCard
                 {...words[wIndex]}
                 ended={ended}
