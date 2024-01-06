@@ -3,6 +3,9 @@ import { QuizProvider } from "./components/quiz/QuizApp"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import ResultsPage from "./components/pages/responses/ResultsPage"
 import TopicsPage from "./components/pages/topics/TopicsPage"
+import Page from "./components/Basic/Page"
+import Header from "./components/Basic/Header"
+import Footer from "./components/Basic/Footer"
 
 const router = createBrowserRouter([
     {
@@ -21,12 +24,14 @@ const router = createBrowserRouter([
 
 function App() {
     return (
-        <div>
-            <header className="app-header">
-                <span className="app-header__logo">Learn De articles!</span>
-            </header>
-            <RouterProvider router={router} />
-            {/* <QuizApp words={words} /> */}
+        <div className="top-and-bottom-layouts">
+            <>
+                <Header />
+                <Page>
+                    <RouterProvider router={router} />
+                </Page>
+            </>
+            <Footer />
         </div>
     )
 }

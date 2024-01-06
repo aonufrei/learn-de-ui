@@ -10,3 +10,9 @@
 .app-header__logo {
     font-size: 24px;
 }
+
+.top-and-bottom-layouts {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

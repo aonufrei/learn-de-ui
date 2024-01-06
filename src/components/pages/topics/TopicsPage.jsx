@@ -27,8 +27,19 @@ const TopicsPage = () => {
 
     return (
         <div className="page-container">
-            <p>Select topic of words:</p>
-            <div className="topics-container">
+            <h2>Words by Topics</h2>
+            <hr />
+            <p>Select the topic you are interested in:</p>
+            <ul style={{ color: "black" }}>
+                {topics.map((it, index) => (
+                    <li>
+                        <Link key={index} to={it.url}>
+                            {it.name}
+                        </Link>
+                    </li>
+                ))}
+            </ul>
+            {/* <div className="topics-container">
                 {topics.map((it, index) => (
                     <Link key={index} to={it.url}>
                         <div className="topic">
@@ -36,13 +47,11 @@ const TopicsPage = () => {
                             <span className="topic__description">
                                 {it.description}
                             </span>
-                            <span className="topic__amount">
-                                {it.amount}
-                            </span>
+                            <span className="topic__amount">{it.amount}</span>
                         </div>
                     </Link>
                 ))}
-            </div>
+            </div> */}
         </div>
     )
 }
