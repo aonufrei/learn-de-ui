@@ -1,7 +1,7 @@
-import Page from "../../Basic/Page"
+import Page from "../../basic/Page"
 import { Link } from "react-router-dom"
 
-import "../../Basic/basic.css"
+import "../../basic/basic.css"
 import "./styles.css"
 
 const WelcomePage = () => {
@@ -19,7 +19,7 @@ const WelcomePage = () => {
                 good you will know the articles after that.
             </p>
             <p className="article">
-                Press <Link className="link" to="/words">Here</Link> to select the topics
+                Press <Link className="link" to="/topics">Here</Link> to select the topics
             </p>
         </Page>
     )

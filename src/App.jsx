@@ -1,47 +1,48 @@
 import "./App.css"
 import { QuizProvider } from "./components/quiz/QuizApp"
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+    Outlet,
+} from "react-router-dom"
 import ResultsPage from "./components/pages/responses/ResultsPage"
 import TopicsPage from "./components/pages/topics/TopicsPage"
-import Page from "./components/Basic/Page"
-import Header from "./components/Basic/Header"
-import Footer from "./components/Basic/Footer"
+import Header from "./components/basic/Header"
+import Footer from "./components/basic/Footer"
 import NotFoundPage from "./components/pages/not-found/NotFoundPage"
 import WelcomePage from "./components/pages/welcome/WelcomePage"
 
-const router = createBrowserRouter([
-    {
-        path: "/home",
-        element: <WelcomePage />,
-    },
-    {
-        path: "/words",
-        element: <TopicsPage />,
-    },
-    {
-        path: "/words/:topicid/quiz",
-        element: <QuizProvider />,
-    },
-    {
-        path: "/quiz/results",
-        element: <ResultsPage />,
-    },
-    {
-        path: "*",
-        element: <NotFoundPage />,
-    },
-])
+const AppRouter = () => {
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<App />}>
+                    <Route index element={<WelcomePage />} />
+                    <Route path="topics" element={<TopicsPage />} />
+                    <Route
+                        path="topic/:topicid/quiz"
+                        element={<QuizProvider />}
+                    />
+                    <Route path="quiz/results" element={<ResultsPage />} />
+                    <Route path="*" element={<NotFoundPage />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    )
+}
 
 function App() {
     return (
         <div className="app__container">
-            <div className="app__main">
-                <Header />
-                <RouterProvider router={router} />
-            </div>
+            <Header />
+            <Outlet />
+            {/* <div className="app__main">
+                
+            </div> */}
             <Footer />
         </div>
     )
 }
 
-export default App
+export { AppRouter }

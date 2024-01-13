@@ -8,14 +8,19 @@
     display: block;
     background-color: var(--foreground-color);
     color: var(--font-color);
+    border: 1px solid #00000067;
     padding: 10px 20px;
-    border-radius: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    text-decoration: none;
     transition: 0.3s all;
 }
 
 .topic:hover {
-    transform: scale(1.02);
+    color: white;
+    background-color: var(--btn-color);
     border-radius: 20px;
+    /* transform: scale(1.02); */
 }
 
 .topic__name {

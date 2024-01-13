@@ -7,7 +7,7 @@ const Page = ({ children, title }) => {
             <div className="app-basic-page__content">
                 {title && (
                     <>
-                        <h2 className="page__title">{title}</h2>
+                        <h1 className="page__title">{title}</h1>
                         <hr className="page__divider"/>
                     </>
                 )}

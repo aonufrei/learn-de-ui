@@ -1,18 +1,55 @@
 :root {
-    --bar-height: 50px
+    --bar-height: 50px;
+    --page-bottom-margin: 80px;
+    --mobile-margin: 0px;
+    --left-page-padding: 150px;
+    --right-page-padding: 150px;
+    --max-page-width: 1440px;
+    --mid-page-width: 768px;
 }
 
 .app-bar {
+    display: grid;
+    grid-template-columns: auto var(--max-page-width) auto;
     background-color: var(--background-color);
     height: var(--bar-height);
     width: 100%;
-    padding-left: 150px;
-    padding-right: 150px;
 }
 
 .header {
-    position: absolute;
+    position: sticky;
     top: 0;
+}
+
+.header__container {
+    display: flex;
+    align-items: center;
+}
+
+.header__logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header-nav__container {
+    padding-left: 40px;
+    display: flex;
+    flex-direction: row;
+}
+
+.header-nav__link {
+    color: white;
+    font-size: 16px;
+}
+
+.header-nav__link:hover {
+    color: white;
+}
+
+
+.footer {
+    margin-top: auto;
 }
 
 .always-on-top {
@@ -42,14 +79,14 @@
 .app-basic-page {
     width: 100%;
     display: grid;
-    grid-template-columns: 150px auto 150px;
+    grid-template-columns: auto var(--max-page-width) auto;
     color: var(--font-color);
 }
 
 .app-basic-page__content {
-    padding: 80px 40px 0px 40px;
+    padding: 40px;
     margin-bottom: 80px;
-    /* background-color: #fff3f8; */
+    min-height: calc(100dvh - 2 * var(--bar-height) - var(--page-bottom-margin));
     background-color: white;
 }
 
@@ -63,9 +100,57 @@
 }
 
 .page__divider {
+    border: none;
+    height: 2px;
+    background-color: var(--font-color);
     margin-bottom: 20px;
 }
 
 .article {
     padding-bottom: 20px;
+}
+
+@media (max-width: 1440px) {
+
+    .app-bar {
+        grid-template-columns: auto var(--mid-page-width) auto;
+    }
+
+    .app-basic-page {
+        grid-template-columns: auto var(--mid-page-width) auto;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .app-bar {
+        grid-template-columns: 0px auto 0px;
+    }
+
+    .app-bar__container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .app-basic-page__content {
+        padding: 40px 10px 40px 10px;
+    }
+
+    .header__container {
+        justify-content: center;
+    }
+
+    .header-nav__container {
+        display: none;
+    }
+
+    .app-basic-page {
+        grid-template-columns: 0px auto 0px;
+    }
+
+    .app-basic-page__content {
+        margin-bottom: var(--mobile-margin);
+        min-height: calc(100dvh - 2 * var(--bar-height));
+    }
 }

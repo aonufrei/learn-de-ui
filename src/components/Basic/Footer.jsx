@@ -4,10 +4,12 @@ import "./basic.css"
 
 const Footer = () => {
     return (
-        <footer className="app-bar">
+        <footer className="footer app-bar">
+            <span />
             <div className="app-bar__container">
                 <span className="app-footer__title">Developed by @aonufrei</span>
             </div>
+            <span />
         </footer>
     )
 }

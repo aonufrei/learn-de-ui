@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import "../../Basic/basic.css"
+import "../../basic/basic.css"
 import "./styles.css"
 import { getAllTopics } from "../../../service/APIService"
-import Page from "../../Basic/Page"
+import Page from "../../basic/Page"
 
 const TopicsPage = () => {
     const [topics, setTopics] = useState([])
@@ -13,7 +13,7 @@ const TopicsPage = () => {
             .then((r) => {
                 const data = r.map((o) => ({
                     ...o,
-                    url: `/words/${o.id}/quiz`,
+                    url: `/topic/${o.id}/quiz`,
                 }))
                 data.sort((f, s) => (f.name > s.name ? 1 : -1))
                 setTopics(data)
@@ -29,16 +29,14 @@ const TopicsPage = () => {
 
     return (
         <Page title={"Words by Topics"}>
-            <p className="article">Select the topic you are interested in:</p>
-            <ul style={{ color: "black" }}>
+            <h2 className="article">Select the topic you are interested in:</h2>
+            <div className="topics-container">
                 {topics.map((it, index) => (
-                    <li>
-                        <Link className="link" key={index} to={it.url}>
-                            {it.name}
-                        </Link>
-                    </li>
+                    <Link className="topic" key={index} to={it.url}>
+                        {it.name}
+                    </Link>
                 ))}
-            </ul>
+            </div>
         </Page>
     )
 }

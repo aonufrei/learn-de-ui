@@ -1,4 +1,4 @@
-import Page from "../../Basic/Page"
+import Page from "../../basic/Page"
 import "./styles.css"
 
 const NotFoundPage = () => {

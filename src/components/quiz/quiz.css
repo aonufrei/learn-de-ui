@@ -32,7 +32,8 @@
 
 .word-card {
     min-height: calc(100vh * 0.7);
-    min-width: calc(100vw * 0.4);
+    /* min-width: calc(100vw * 0.4); */
+    aspect-ratio: 5 / 7;
     border-radius: 20px;
     background-color: var(--foreground-color);
     padding: 35px 20px;
