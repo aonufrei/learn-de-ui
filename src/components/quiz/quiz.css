@@ -1,7 +1,7 @@
 .quiz-container {
     width: 100%;
     height: 100%;
-    margin-top: calc(var(--bar-height) + 2em);
+    margin-top: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,29 +9,32 @@
 }
 
 .next-word__button {
-    margin-top: 30px;
-    font-size: 48px;
+    position: fixed;
+    right: 0;
+    bottom: var(--bar-height);
+    margin-right: 30px;
+    margin-bottom: 30px;
+    font-size: 28px;
     font-weight: 600;
     padding: 10px;
     background-color: var(--success-color);
     padding: 10px 50px;
+    transition: 0.3s;
+    opacity: 1;
+}
+
+.next-word__button-hidden {
+    opacity: 0;
+    bottom: -100px;
 }
 
 .next-word__button:focus {
     outline: none;
 }
 
-.word-counter {
-    margin: 0;
-    padding: 0;
-    font-size: 20px;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-}
-
 .word-card {
-    min-height: calc(100vh * 0.7);
+    min-height: 70dvh;
+    max-height: 75dvh;
     /* min-width: calc(100vw * 0.4); */
     aspect-ratio: 5 / 7;
     border-radius: 20px;
@@ -43,7 +46,20 @@
     align-items: center;
 }
 
-.word-card_explanation {
+.word-card__right {
+    width: 100%;
+    padding: 0 10px;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+.word-card__counter {
+    color: var(--font-color-2);
+    font-weight: bold;
+}
+
+.word-card__explanation {
     padding: 0;
     margin: 0;
     margin-bottom: 5px;
@@ -100,4 +116,48 @@
 
 .word-card__btn-failed {
     background-color: var(--failure-color);
+}
+
+.big-screen-button {
+    display: block;
+}
+
+.small-screen-button {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .quiz-container {
+        margin-top: 0;
+        padding: 5px;
+        height: calc(100dvh - 2 * var(--bar-height));
+    }
+    .word-card {
+        min-width: auto;
+        max-height: auto;
+        width: 100%;
+        aspect-ratio: auto;
+    }
+
+    .big-screen-button {
+        display: none;
+    }
+
+    .small-screen-button {
+        display: block;
+        margin-top: 20px;
+    }
+
+    .small-next-word__button {
+        font-size: 28px;
+        font-weight: 600;
+        padding: 10px;
+        color: white;
+        background-color: var(--success-color);
+        padding: 10px 50px;
+    }
+
+    .small-next-word__button-hidden {
+        display: none;
+    }
 }

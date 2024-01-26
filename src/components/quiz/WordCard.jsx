@@ -3,6 +3,8 @@ import React from "react"
 import "./quiz.css"
 
 const WordCard = ({
+    wordNumber,
+    wordsAmount,
     word,
     final,
     translation,
@@ -40,7 +42,9 @@ const WordCard = ({
 
     return (
         <div className="word-card">
-            <span></span>
+            <div className="word-card__right">
+                <span className="word-card__counter">{wordNumber}/{wordsAmount}</span>
+            </div>
             <div>
                 <p className="word-card__title">{ended ? final : word}</p>
                 {ended && (
@@ -49,7 +53,7 @@ const WordCard = ({
             </div>
 
             <div style={{ width: "100%" }}>
-                <p className="word-card_explanation">Select correct article:</p>
+                <p className="word-card__explanation">Select correct article:</p>
                 <div className="word-card__cnt-button">
                     <button
                         className={"word-card__button" + getAddBtnStyle(0)}

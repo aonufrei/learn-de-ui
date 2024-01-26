@@ -21,11 +21,10 @@ const QuizApp = ({ topicId }) => {
 
     useEffect(() => {
         getWordsOfTopic(topicId).then((w) => {
-            console.log(w)
             setWords(w)
         })
         return () => "HALLO"
-    }, [])
+    }, [topicId])
 
     const onOptionSel = (id) => {
         if (ended) return
@@ -72,6 +71,8 @@ const QuizApp = ({ topicId }) => {
     return (
         <div className="quiz-container">
             <WordCard
+                wordNumber={wIndex + 1}
+                wordsAmount={words.length}
                 {...words[wIndex]}
                 ended={ended}
                 article={selArticle}
@@ -79,14 +80,19 @@ const QuizApp = ({ topicId }) => {
                 onEnded={onEnded}
                 onResponse={onResponse}
             />
-            <div style={{ display: ended ? "block" : "none" }}>
-                <button
-                    className="next-word__button"
-                    onClick={(_) => (isLastWord() ? endGame() : onNextWord())}
-                >
-                    {isLastWord() ? "End Quiz" : "Next Word"}
-                </button>
-            </div>
+            <button
+                className={`small-screen-button small-next-word__button${!ended ? " small-next-word__button-hidden" : ""}`}
+                onClick={(_) => (isLastWord() ? endGame() : onNextWord())}
+            >
+                {isLastWord() ? "End Quiz" : "Next Word"}
+            </button>
+            <button
+                className={`big-screen-button next-word__button${!ended ? " next-word__button-hidden" : ""}`}
+                onClick={(_) => (isLastWord() ? endGame() : onNextWord())}
+            >
+                {isLastWord() ? "End Quiz" : "Next Word"}
+            </button>
+            
         </div>
     )
 }
