@@ -1,37 +1,40 @@
 import React from "react"
 
+import { determineArticle } from "../../service/APIService"
+import { capitalize } from "../../service/utils"
+
 import "./quiz.css"
 
 const WordCard = ({
     wordNumber,
     wordsAmount,
     word,
-    final,
-    translation,
-    correct,
     ended,
     article,
     onOptionSel,
     onEnded,
     onResponse,
 }) => {
-    const onArticleSelected = (id) => {
+    const createFinal = (word) =>
+        `${capitalize(determineArticle(word.article))} ${capitalize(word.text)}`
+
+    const onArticleSelected = (selectedArticle) => {
         if (ended) {
             return
         }
         onResponse({
-            final: final,
-            translation: translation,
-            expected: correct,
-            actual: id,
+            final: createFinal(word),
+            translation: word.translation,
+            expected: word.article,
+            actual: selectedArticle,
         })
-        onOptionSel(id)
+        onOptionSel(selectedArticle)
         onEnded(true)
     }
 
     const getAddBtnStyle = (id) => {
         if (!ended) return " word-card__btn-active"
-        if (correct === id) {
+        if (word.article === id) {
             return " word-card__btn-success"
         }
         if (id === article && correct != id) {
@@ -43,17 +46,23 @@ const WordCard = ({
     return (
         <div className="word-card">
             <div className="word-card__right">
-                <span className="word-card__counter">{wordNumber}/{wordsAmount}</span>
+                <span className="word-card__counter">
+                    {wordNumber}/{wordsAmount}
+                </span>
             </div>
             <div>
-                <p className="word-card__title">{ended ? final : word}</p>
+                <p className="word-card__title">
+                    {ended ? createFinal(word) : word.text}
+                </p>
                 {ended && (
-                    <p className="word-card__translation">{translation}</p>
+                    <p className="word-card__translation">{word.translation}</p>
                 )}
             </div>
 
             <div style={{ width: "100%" }}>
-                <p className="word-card__explanation">Select correct article:</p>
+                <p className="word-card__explanation">
+                    Select correct article:
+                </p>
                 <div className="word-card__cnt-button">
                     <button
                         className={"word-card__button" + getAddBtnStyle(0)}

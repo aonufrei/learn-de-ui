@@ -53,13 +53,6 @@ const QuizApp = ({ topicId }) => {
         })
     }
 
-    const getWordsCounter = () => {
-        if (wIndex >= words.length) {
-            return "Finished"
-        }
-        return `${wIndex + 1}/${words.length}`
-    }
-
     const isLastWord = () => {
         return wIndex === words.length - 1
     }
@@ -68,12 +61,13 @@ const QuizApp = ({ topicId }) => {
         setResponses([...responses, r])
     }
 
+    if (words.length === 0) return (<>No words in the topic</>)
     return (
         <div className="quiz-container">
             <WordCard
                 wordNumber={wIndex + 1}
                 wordsAmount={words.length}
-                {...words[wIndex]}
+                word={words[wIndex]}
                 ended={ended}
                 article={selArticle}
                 onOptionSel={onOptionSel}

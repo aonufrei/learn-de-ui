@@ -1,6 +1,6 @@
 import { capitalize } from "./utils"
 
-const SERVER = "http://127.0.0.1:3000"
+const SERVER = "http://127.0.0.1:8080/api/v1"
 
 function determineArticle(id) {
     const a = {
@@ -17,8 +17,11 @@ function determineArticle(id) {
 
 async function getWordsOfTopic(topicId) {
     console.log(`Get words for topic ${topicId}`)
-    const url = `${SERVER}/topic/${topicId}/words`
+    const url = `${SERVER}/topics/${topicId}/words`
     const response = await fetch(url, { method: "GET" })
+    if (!response.ok) {
+        return []
+    } 
     let data = await response.json()
     data = data.map((d) => ({
         ...d,
@@ -32,6 +35,9 @@ async function getAllTopics() {
     console.log(`Get all topics`)
     const url = `${SERVER}/topics`
     const response = await fetch(url, { method: "GET" })
+    if (!response.ok) {
+        return []
+    }
     return await response.json()
 }
 
