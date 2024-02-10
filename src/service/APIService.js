@@ -41,4 +41,15 @@ async function getAllTopics() {
     return await response.json()
 }
 
-export { SERVER, getWordsOfTopic, determineArticle, getAllTopics }
+async function login(username, password) {
+    console.log("Send login request")
+    const url = `${SERVER}/auth/login`
+    const requestBody = JSON.stringify({username: username, password: password})
+    const response = await fetch(url, {method: "POST", headers: { "Content-Type": "application/json"}, body: requestBody})
+    if (!response.ok) {
+        return undefined
+    }
+    return await response.text()
+}
+
+export { SERVER, getWordsOfTopic, determineArticle, getAllTopics, login }
