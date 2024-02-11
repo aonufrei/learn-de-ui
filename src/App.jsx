@@ -14,6 +14,7 @@ import NotFoundPage from "./components/pages/not-found/NotFoundPage"
 import WelcomePage from "./components/pages/welcome/WelcomePage"
 
 import LoginPage from "./components/admin/pages/login/LoginPage"
+import ManageTopicsPage from "./components/admin/pages/topics/ManageTopicsPage"
 
 const AppRouter = () => {
     return (
@@ -31,6 +32,7 @@ const AppRouter = () => {
                 </Route>
                 <Route path="/admin" element={<App />}>
                     <Route path="login" element={<LoginPage />}/>
+                    <Route path="topics" element={<ManageTopicsPage />} />
                 </Route>
             </Routes>
         </BrowserRouter>
