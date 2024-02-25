@@ -37,7 +37,7 @@ const WordCard = ({
         if (word.article === id) {
             return " word-card__btn-success"
         }
-        if (id === article && correct != id) {
+        if (article === id) {
             return " word-card__btn-failed"
         }
         return ""
