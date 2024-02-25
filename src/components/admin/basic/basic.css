@@ -1,0 +1,14 @@
+.manage-page__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.manage-page__create-btn {
+    background-color: var(--btn-color);
+}
+
+.manage-page__link {
+    text-decoration: underline;
+}

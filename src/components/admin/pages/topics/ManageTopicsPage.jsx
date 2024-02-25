@@ -1,34 +1,95 @@
 import React, { useEffect, useState } from "react"
-import { deleteTopic, getAllTopics } from "../../../../service/AdminAPIService"
+import {
+    createTopic,
+    deleteTopic,
+    getAllTopics,
+    updateTopic,
+} from "../../../../service/AdminAPIService"
 import Page from "../../../basic/Page"
 
-import "./styles.css"
+import Popup from "reactjs-popup"
+
+import { useNavigate } from "react-router-dom"
+
+import TopicsTable from "./Tables"
+import TopicModal from "./Modal"
+
+import "../../basic/modal.css"
+import "../../basic/basic.css"
 
 const ManageTopicsPage = () => {
+    const navigate = useNavigate()
     const [topics, setTopics] = useState([])
 
     useEffect(() => {
-        getAllTopics().then((res) => res === undefined || setTopics(res))
+        refreshTopics()
     }, [])
 
-    const onUpdate = (current) => {}
+    const refreshTopics = () => {
+        getAllTopics().then((res) => res === undefined || setTopics(res))
+    }
+
+    const onCreate = (data) => {
+        const token = localStorage.getItem("token")
+        if (token === undefined) {
+            navigate("/admin/login")
+            return
+        }
+        console.log(data)
+        createTopic(
+            { name: data.name, description: data.description },
+            token
+        ).then((_) => refreshTopics())
+    }
+    const onUpdate = (current) => {
+        const token = localStorage.getItem("token")
+        if (token === undefined) {
+            navigate("/admin/login")
+            return
+        }
+        updateTopic(
+            current.id,
+            { name: current.name, description: current.description },
+            token
+        ).then((_) => refreshTopics())
+    }
 
     const onDelete = (id) => {
-        deleteTopic(id).then((res) => true === res && console.log("Deleted"))
+        const token = localStorage.getItem("token")
+        if (token === undefined) {
+            navigate("/admin/login")
+            return
+        }
+        deleteTopic(id, token).then((isDeleted) => isDeleted && refreshTopics())
     }
 
     return (
         <Page>
             <div>
-                <div className="management">
-                    <h1 className="management__title">Topics: </h1>
-                    <button className="management__create-btn">
-                        Create topic
-                    </button>
+                <div className="manage-page__header">
+                    <h1 className="manage-page__header-title">Topics: </h1>
+                    <Popup
+                        trigger={
+                            <button className="manage-page__create-btn">
+                                Create topic
+                            </button>
+                        }
+                        modal
+                        nested
+                    >
+                        {(close) => (
+                            <TopicModal
+                                title={`Create new Topic`}
+                                onClose={(_) => close()}
+                                onSubmit={(d) => onCreate(d)}
+                            />
+                        )}
+                    </Popup>
                 </div>
                 <div>
                     <TopicsTable
                         data={topics}
+                        colms={5}
                         onUpdate={onUpdate}
                         onDelete={onDelete}
                     />
@@ -36,59 +97,6 @@ const ManageTopicsPage = () => {
             </div>
         </Page>
     )
-}
-
-const TopicsTable = ({ data, onUpdate, onDelete }) => {
-    return (
-        <div className="t-table">
-            <div className="t-table-row table-header">
-                <span>ID</span>
-                <span>Name</span>
-                <span>Description</span>
-                <span>Action</span>
-            </div>
-            {data.map((d) => (
-                <TopicRow
-                    key={d.id}
-                    row={d}
-                    onUpdate={onUpdate}
-                    onDelete={onDelete}
-                />
-            ))}
-        </div>
-    )
-}
-
-const TopicRow = ({ row, onUpdate, onDelete }) => {
-    return (
-        <div className="t-table-row">
-            <span>{row.id}</span>
-            <span>{row.name}</span>
-            <span>{row.description}</span>
-            <span>
-                <a
-                    className="t-action"
-                    onClick={(_) =>
-                        onUpdate({
-                            id: row.id,
-                            name: row.name,
-                            description: row.description,
-                        })
-                    }
-                >
-                    Update
-                </a>
-                <a> / </a>
-                <a className="t-action" onClick={(_) => onDelete(row.id)}>
-                    Delete
-                </a>
-            </span>
-        </div>
-    )
-}
-
-const TopicDialog = ({ topic }) => {
-    return {}
 }
 
 export default ManageTopicsPage

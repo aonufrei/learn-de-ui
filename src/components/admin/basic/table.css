@@ -1,19 +1,3 @@
-
-
-.management {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 20px;
-}
-
-.management__title {
-}
-
-.management__create-btn {
-    background-color: var(--btn-color);;
-}
-
 .t-input-cell {
     color: var(--font-color);
     background-color: white;
@@ -25,11 +9,13 @@
 }
 
 .t-action {
-    color: var(--background-color);
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    color: var(--font-color);
     text-decoration: underline;
     cursor: pointer;
 }
-
 
 .t-table {
     border: 1px solid var(--table-border-color);
@@ -37,8 +23,8 @@
 
 .t-table-row {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    
+    /* grid-template-columns: repeat(5, 1fr); */
+
     &:not(:last-child) {
         border-bottom: 1px solid var(--table-border-color);
     }
@@ -47,7 +33,7 @@
 .t-table-row span {
     padding: 5px 10px;
     word-break: break-word;
-    
+
     &:not(:last-child) {
         border-right: 1px solid var(--table-border-color);
     }
