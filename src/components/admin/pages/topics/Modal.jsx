@@ -5,6 +5,7 @@ import "../../basic/modal.css"
 const TopicModal = ({ data, showId, title, onClose, onSubmit }) => {
     const [name, setName] = useState(data?.name || "")
     const [desc, setDesc] = useState(data?.description || "")
+
     return (
         <div className="modal">
             <div className="modal-header">

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import Page from "../../../basic/Page"
 import WordsTable from "./Tables"
 import WordModal from "./Modal"
 import Popup from "reactjs-popup"
@@ -13,11 +12,13 @@ import {
     getTopicInfoById,
 } from "../../../../service/AdminAPIService"
 
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 import "../../basic/basic.css"
+import ManagePage from "../../basic/ManagePage"
 
 const ManageWordsPage = () => {
+    const navigate = useNavigate()
     const { topicid } = useParams()
     const [words, setWords] = useState([])
     const [topicInfo, setTopicInfo] = useState({})
@@ -33,13 +34,11 @@ const ManageWordsPage = () => {
         )
     }
 
+    const onUnauthorized = () => navigate("/admin/login")
+
     const fetchTopicInfo = () => {
         const token = localStorage.getItem("token")
-        if (token === undefined) {
-            navigate("/admin/login")
-            return
-        }
-        getTopicInfoById(topicid, token).then((r) => {
+        getTopicInfoById(topicid, token, onUnauthorized).then((r) => {
             if (r !== undefined) {
                 setTopicInfo(r)
             }
@@ -48,91 +47,80 @@ const ManageWordsPage = () => {
 
     const onCreate = (data) => {
         const token = localStorage.getItem("token")
-        if (token === undefined) {
-            navigate("/admin/login")
-            return
-        }
-        addWordToTopic(parseInt(topicid), data, token).then((r) => {
-            if (r !== undefined) {
-                refreshWords()
+        addWordToTopic(parseInt(topicid), data, token, onUnauthorized).then(
+            (r) => {
+                if (r !== undefined) {
+                    refreshWords()
+                }
             }
-        })
+        )
     }
 
     const onUpdate = (data) => {
         const token = localStorage.getItem("token")
-        if (token === undefined) {
-            navigate("/admin/login")
-            return
-        }
-        updateWordOfTopic(parseInt(topicid), data, token).then((r) => {
-            if (r !== undefined) {
-                refreshWords()
+        updateWordOfTopic(parseInt(topicid), data, token, onUnauthorized).then(
+            (r) => {
+                if (r !== undefined) {
+                    refreshWords()
+                }
             }
-        })
+        )
     }
 
     const onDelete = (id) => {
         const token = localStorage.getItem("token")
-        if (token === undefined) {
-            navigate("/admin/login")
-            return
-        }
-        deleteWord(id, token).then((r) => {
+        deleteWord(id, token, onUnauthorized).then((r) => {
             if (r !== undefined) {
                 refreshWords()
             }
         })
     }
 
+    const CreateWordBtn = (
+        <Popup
+            trigger={
+                <button className="manage-page__create-btn">
+                    Add New Word
+                </button>
+            }
+            modal
+            nested
+        >
+            {(close) => (
+                <WordModal
+                    data={{}}
+                    title={`Create new Word`}
+                    onClose={(_) => close()}
+                    onSubmit={(d) => onCreate(d)}
+                />
+            )}
+        </Popup>
+    )
+
+    const WordsInfo = (
+        <div className="manage-words__topic-info">
+            <p>{`Topic name: "${topicInfo?.name || ""}"`}</p>
+            <p>{`Topic description: "${topicInfo?.description || ""}"`}</p>
+        </div>
+    )
+
     return (
-        <Page>
-            <div>
-                <div>
-                    <div>
-                        <div className="manage-page__header">
-                            <h1 className="manage-page__header-title">
-                                Words:
-                            </h1>
-                            <Popup
-                                trigger={
-                                    <button className="manage-page__create-btn">
-                                        Add New Word
-                                    </button>
-                                }
-                                modal
-                                nested
-                            >
-                                {(close) => (
-                                    <WordModal
-                                        data={{}}
-                                        title={`Create new Word`}
-                                        onClose={(_) => close()}
-                                        onSubmit={(d) => onCreate(d)}
-                                    />
-                                )}
-                            </Popup>
-                        </div>
-                        <div className="manage-words__topic-info">
-                            <p>{`Topic name: "${topicInfo?.name || ""}"`}</p>
-                            <p>{`Topic description: "${
-                                topicInfo?.description || ""
-                            }"`}</p>
-                        </div>
-                    </div>
-                </div>
-                {words.length >= 1 ? (
-                    <WordsTable
-                        data={words}
-                        colms={5}
-                        onUpdate={(data) => onUpdate(data)}
-                        onDelete={(id) => onDelete(id)}
-                    />
-                ) : (
-                    <div>No words in the topic</div>
-                )}
-            </div>
-        </Page>
+        <ManagePage
+            title="Words: "
+            rightButton={CreateWordBtn}
+            info={WordsInfo}
+        >
+            {words.length >= 1 ? (
+                <WordsTable
+                    data={words}
+                    colms={5}
+                    onUpdate={(data) => onUpdate(data)}
+                    onDelete={(id) => onDelete(id)}
+                />
+            ) : (
+                <div>No words in the topic</div>
+            )}
+        </ManagePage>
     )
 }
 

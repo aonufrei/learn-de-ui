@@ -1,8 +1,8 @@
 import { capitalize } from "./utils"
 
-const SERVER = "http://127.0.0.1:8080/api/v1"
+export const SERVER = "http://127.0.0.1:8080/api/v1"
 
-function determineArticle(id) {
+export function determineArticle(id) {
     const a = {
         0: "der",
         1: "die",
@@ -15,7 +15,7 @@ function determineArticle(id) {
     return res
 }
 
-async function getWordsOfTopic(topicId) {
+export async function getWordsOfTopic(topicId) {
     console.log(`Get words for topic ${topicId}`)
     const url = `${SERVER}/topics/${topicId}/words`
     const response = await fetch(url, { method: "GET" })
@@ -31,7 +31,7 @@ async function getWordsOfTopic(topicId) {
     return data
 }
 
-async function getAllTopics() {
+export async function getAllTopics() {
     console.log(`Get all topics`)
     const url = `${SERVER}/topics`
     const response = await fetch(url, { method: "GET" })
@@ -41,7 +41,7 @@ async function getAllTopics() {
     return await response.json()
 }
 
-async function login(username, password) {
+export async function login(username, password) {
     console.log("Send login request")
     const url = `${SERVER}/auth/login`
     const requestBody = JSON.stringify({username: username, password: password})
@@ -51,5 +51,3 @@ async function login(username, password) {
     }
     return await response.text()
 }
-
-export { SERVER, getWordsOfTopic, determineArticle, getAllTopics, login }
