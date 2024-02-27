@@ -53,9 +53,6 @@ function App({isAdmin}) {
         <div className="app__container">
             {isAdmin ? <AdminHeader /> : <Header />}
             <Outlet />
-            {/* <div className="app__main">
-                
-            </div> */}
             <Footer />
         </div>
     )
