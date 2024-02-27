@@ -1,6 +1,6 @@
 import "./App.css"
 import { QuizProvider } from "./components/quiz/QuizApp"
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Outlet, useNavigate } from "react-router-dom"
 import ResultsPage from "./components/pages/responses/ResultsPage"
 import TopicsPage from "./components/pages/topics/TopicsPage"
 import {AdminHeader, Header} from "./components/basic/Header"
@@ -11,6 +11,7 @@ import WelcomePage from "./components/pages/welcome/WelcomePage"
 import LoginPage from "./components/admin/pages/login/LoginPage"
 import ManageTopicsPage from "./components/admin/pages/topics/ManageTopicsPage"
 import ManageWordsPage from "./components/admin/pages/words/ManageWordsPage"
+import { useEffect } from "react"
 
 const AppRouter = () => {
     return (
@@ -40,6 +41,14 @@ const AppRouter = () => {
 }
 
 function App({isAdmin}) {
+
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (isAdmin && !localStorage.getItem("token")) {
+            navigate('/admin/login')
+        }
+    }, [])
+    
     return (
         <div className="app__container">
             {isAdmin ? <AdminHeader /> : <Header />}
