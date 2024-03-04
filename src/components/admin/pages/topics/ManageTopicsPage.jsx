@@ -6,7 +6,6 @@ import {
     updateTopic,
 } from "../../../../service/AdminAPIService"
 
-
 import Popup from "reactjs-popup"
 
 import { useNavigate } from "react-router-dom"
@@ -19,11 +18,10 @@ import "../../basic/basic.css"
 
 import ManagePage from "../../basic/ManagePage"
 
-
 const ManageTopicsPage = () => {
     const navigate = useNavigate()
     const [topics, setTopics] = useState([])
-            
+
     useEffect(() => {
         refreshTopics()
     }, [])
@@ -82,12 +80,16 @@ const ManageTopicsPage = () => {
 
     return (
         <ManagePage title="Topics: " rightButton={CreateTopicButton}>
-            <TopicsTable
-                data={topics}
-                colms={5}
-                onUpdate={onUpdate}
-                onDelete={onDelete}
-            />
+            {topics.length >= 1 ? (
+                <TopicsTable
+                    data={topics}
+                    colms={5}
+                    onUpdate={onUpdate} 
+                    onDelete={onDelete}
+                />
+            ) : (
+                <div>No topics exist</div>
+            )}
         </ManagePage>
     )
 }

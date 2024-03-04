@@ -10,9 +10,9 @@
 
 .next-word__button {
     position: fixed;
-    right: 0;
+    right: calc(100vw / 2);
+    transform: translateX(50%);
     bottom: var(--bar-height);
-    margin-right: 30px;
     margin-bottom: 30px;
     font-size: 28px;
     font-weight: 600;
