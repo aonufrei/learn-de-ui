@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import "./quiz.css"
 import WordCard from "./WordCard"
 import { useNavigate, useParams } from "react-router-dom"
 
@@ -23,7 +22,7 @@ const QuizApp = ({ topicId }) => {
         getWordsOfTopic(topicId).then((w) => {
             setWords(w)
         })
-        return () => "HALLO"
+        return () => ""
     }, [topicId])
 
     const onOptionSel = (id) => {
@@ -62,8 +61,9 @@ const QuizApp = ({ topicId }) => {
     }
 
     if (words.length === 0) return (<>No words in the topic</>)
+
     return (
-        <div className="quiz-container">
+        <div className="mt-0 sm:mt-7 sm:p-1 flex justify-center items-center flex-col">
             <WordCard
                 wordNumber={wIndex + 1}
                 wordsAmount={words.length}
@@ -75,18 +75,11 @@ const QuizApp = ({ topicId }) => {
                 onResponse={onResponse}
             />
             <button
-                className={`small-screen-button small-next-word__button${!ended ? " small-next-word__button-hidden" : ""}`}
+                className={`block bg-clsuccess text-xl font-semibold py-5 px-10 mt-10 ${!ended ? "invisible" : "visible"}`}
                 onClick={(_) => (isLastWord() ? endGame() : onNextWord())}
             >
                 {isLastWord() ? "End Quiz" : "Next Word"}
             </button>
-            <button
-                className={`big-screen-button next-word__button${!ended ? " next-word__button-hidden" : ""}`}
-                onClick={(_) => (isLastWord() ? endGame() : onNextWord())}
-            >
-                {isLastWord() ? "End Quiz" : "Next Word"}
-            </button>
-            
         </div>
     )
 }

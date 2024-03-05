@@ -1,6 +1,5 @@
 import React, { useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
-import "./styles.css"
 import Page from "../../basic/Page"
 import ResultsTable from "../../ResultsTable/ResultsTable"
 
@@ -10,24 +9,23 @@ const ResultsPage = () => {
     const sourceUrl = state.sourceUrl
 
     useEffect(() => {
-        console.log(responses)
     }, [])
 
     return (
         <Page title={responses ? "Your results:" : undefined}>
-            <div className="results-page-layout">
-                <div className="response-container">
+            <div>
+                <div className="grid gap-y-1">
                     <ResultsTable data={responses} />
                 </div>
 
-                <div className="nav-btns-container">
+                <div className="flex sticky text-center justify-center gap-2 bottom-7 mt-8 mb-16">
                     <Link to={sourceUrl}>
-                        <button className="nav-btn nav-btn__try-again">
+                        <button className="text-clfore bg-clbtn py-5 px-12 border-none rounded-full transition-all duration-300 hover:scale-[1.1]">
                             Try again
                         </button>
                     </Link>
                     <Link to={"/topics"}>
-                        <button className="nav-btn nav-btn__to-topics">
+                        <button className="text-clfore bg-clbtn py-5 px-12 border-none rounded-full transition-all duration-300 hover:scale-[1.1]">
                             Other Topics
                         </button>
                     </Link>

@@ -3,8 +3,6 @@ import React from "react"
 import { determineArticle } from "../../service/APIService"
 import { capitalize } from "../../service/utils"
 
-import "./quiz.css"
-
 const WordCard = ({
     wordNumber,
     wordsAmount,
@@ -33,51 +31,59 @@ const WordCard = ({
     }
 
     const getAddBtnStyle = (id) => {
-        if (!ended) return " word-card__btn-active"
+        if (!ended) return " bg-clactive hover:bg-clactivehover"
         if (word.article === id) {
-            return " word-card__btn-success"
+            return " bg-clsuccess hover:bg-clsuccess"
         }
         if (article === id) {
-            return " word-card__btn-failed"
+            return " bg-clfailure hover:bg-clfailure"
         }
-        return ""
+        return " bg-clactive hover:bg-clactive"
     }
 
     return (
-        <div className="word-card">
-            <div className="word-card__right">
-                <span className="word-card__counter">
+        <div className="min-h-[70dvh] max-h-[75dvh] aspect-[5/7] bg-clfore rounded-2xl px-5 py-5 flex flex-col justify-between items-center">
+            <div className="w-full px-2.5 flex justify-end items-end">
+                <span className="text-clfont2 font-bold">
                     {wordNumber}/{wordsAmount}
                 </span>
             </div>
             <div>
-                <p className="word-card__title">
+                <p className="text-center text-clfont text-5xl font-bold m-0 p-0 [text-shadow:_var(--shadow-color)_0px_4px_10px]">
                     {ended ? createFinal(word) : word.text}
                 </p>
                 {ended && (
-                    <p className="word-card__translation">{word.translation}</p>
+                    <p className="text-center text-clfont text-4xl m-0 mt-3 p-0">
+                        {word.translation}
+                    </p>
                 )}
             </div>
 
-            <div style={{ width: "100%" }}>
-                <p className="word-card__explanation">
+            <div className="w-full">
+                <p className="m-0 p-0 mb-1.5 text-clfont text-lg text-left">
                     Select correct article:
                 </p>
-                <div className="word-card__cnt-button">
+                <div className="w-full grid gap-x-1 grid-cols-3">
                     <button
-                        className={"word-card__button" + getAddBtnStyle(0)}
+                        className={`outline-none text-lg py-2 px-4 transition-all duration-300 ${getAddBtnStyle(
+                            0
+                        )}`}
                         onClick={(_) => onArticleSelected(0)}
                     >
                         Der
                     </button>
                     <button
-                        className={"word-card__button" + getAddBtnStyle(1)}
+                        className={`outline-none text-lg py-2 px-4 transition-all duration-300 ${getAddBtnStyle(
+                            1
+                        )}`}
                         onClick={(_) => onArticleSelected(1)}
                     >
                         Die
                     </button>
                     <button
-                        className={"word-card__button" + getAddBtnStyle(2)}
+                        className={`outline-none text-lg py-2 px-4 transition-all duration-300 ${getAddBtnStyle(
+                            2
+                        )}`}
                         onClick={(_) => onArticleSelected(2)}
                     >
                         Das

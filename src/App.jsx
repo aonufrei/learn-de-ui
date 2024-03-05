@@ -1,9 +1,14 @@
-import "./App.css"
 import { QuizProvider } from "./components/quiz/QuizApp"
-import { BrowserRouter, Routes, Route, Outlet, useNavigate } from "react-router-dom"
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+    Outlet,
+    useNavigate,
+} from "react-router-dom"
 import ResultsPage from "./components/pages/responses/ResultsPage"
 import TopicsPage from "./components/pages/topics/TopicsPage"
-import {AdminHeader, Header} from "./components/basic/Header"
+import { AdminHeader, Header } from "./components/basic/Header"
 import Footer from "./components/basic/Footer"
 import NotFoundPage from "./components/pages/not-found/NotFoundPage"
 import WelcomePage from "./components/pages/welcome/WelcomePage"
@@ -40,19 +45,20 @@ const AppRouter = () => {
     )
 }
 
-function App({isAdmin}) {
-
+function App({ isAdmin }) {
     const navigate = useNavigate()
     useEffect(() => {
         if (isAdmin && !localStorage.getItem("token")) {
-            navigate('/admin/login')
+            navigate("/admin/login")
         }
     }, [])
-    
+
     return (
-        <div className="app__container">
+        <div className="flex flex-col justify-between min-h-dvh">
             {isAdmin ? <AdminHeader /> : <Header />}
-            <Outlet />
+            <main className="flex-1 flex flex-col justify-between h-full">
+                <Outlet />
+            </main>
             <Footer />
         </div>
     )

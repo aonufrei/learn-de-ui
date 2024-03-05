@@ -1,31 +1,31 @@
 import React from "react"
 
 import { determineArticle } from "../../service/APIService"
-import "./styles.css"
 
 const ResultsTable = ({ data }) => {
     return (
-        <div className="table">
-            <div className="table-row table-header">
-                <span>Word</span>
-                <span>Translation</span>
-                <span>Your response</span>
+        <div className="grid divide-y divide-clfore">
+            <div className="grid grid-cols-3 divide-x divide-clfore bg-clback text-clfore font-bold text-xl">
+                <span className="px-2.5 py-1">Word</span>
+                <span className="px-2.5 py-1">Translation</span>
+                <span className="px-2.5 py-1">Your response</span>
             </div>
             {data.map((d, i) => (
                 <div
                     key={`res_${i}`}
                     className={
-                        "table-row table-data-row " +
-                        `${
+                        `grid grid-cols-3 divide-x divide-clfore ${
                             d.expected == d.actual
-                                ? "table-data-row__correct"
-                                : "table-data-row__incorrect"
+                                ? "bg-clsuccess"
+                                : "bg-clfailure"
                         }`
                     }
                 >
-                    <span>{d.final}</span>
-                    <span>{d.translation}</span>
-                    <span>{determineArticle(d.actual)}</span>
+                    <span className="px-2.5 py-1">{d.final}</span>
+                    <span className="px-2.5 py-1">{d.translation}</span>
+                    <span className="px-2.5 py-1">
+                        {determineArticle(d.actual)}
+                    </span>
                 </div>
             ))}
         </div>
