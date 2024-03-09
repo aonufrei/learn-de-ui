@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react"
 import WordsTable from "./Tables"
 import WordModal from "./Modal"
 import Popup from "reactjs-popup"
-import "./styles.css"
 
 import {
     getWordsForTopic,
@@ -14,8 +13,9 @@ import {
 
 import { useNavigate, useParams } from "react-router-dom"
 
-import "../../basic/basic.css"
 import ManagePage from "../../basic/ManagePage"
+
+import { ActionButton } from "../../../ui/Inputs"
 
 const ManageWordsPage = () => {
     const navigate = useNavigate()
@@ -79,9 +79,9 @@ const ManageWordsPage = () => {
     const CreateWordBtn = (
         <Popup
             trigger={
-                <button className="manage-page__create-btn">
+                <ActionButton className="bg-clbtn text-clfont2">
                     Add New Word
-                </button>
+                </ActionButton>
             }
             modal
             nested
@@ -98,9 +98,9 @@ const ManageWordsPage = () => {
     )
 
     const WordsInfo = (
-        <div className="manage-words__topic-info">
-            <p>{`Topic name: "${topicInfo?.name || ""}"`}</p>
-            <p>{`Topic description: "${topicInfo?.description || ""}"`}</p>
+        <div className="mb-4">
+            <p>{`Topic name: ${topicInfo?.name || ""}`}</p>
+            <p>{`Topic description: ${topicInfo?.description || ""}`}</p>
         </div>
     )
 

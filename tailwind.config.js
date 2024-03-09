@@ -20,6 +20,7 @@ export default {
       'clbtn': '#5d3587',
       'cllink': '#5d3587',
       'cltable': '#0000005e',
+      'clborder': '#22222243',
     },
     extend: {
       aspectRatio: {

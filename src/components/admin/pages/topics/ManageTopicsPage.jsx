@@ -13,10 +13,8 @@ import { useNavigate } from "react-router-dom"
 import TopicsTable from "./Tables"
 import TopicModal from "./Modal"
 
-import "../../basic/modal.css"
-import "../../basic/basic.css"
-
 import ManagePage from "../../basic/ManagePage"
+import { ActionButton } from "../../../ui/Inputs"
 
 const ManageTopicsPage = () => {
     const navigate = useNavigate()
@@ -61,9 +59,9 @@ const ManageTopicsPage = () => {
     const CreateTopicButton = (
         <Popup
             trigger={
-                <button className="manage-page__create-btn">
+                <ActionButton className="bg-clbtn text-clfont2">
                     Create topic
-                </button>
+                </ActionButton>
             }
             modal
             nested
@@ -84,7 +82,7 @@ const ManageTopicsPage = () => {
                 <TopicsTable
                     data={topics}
                     colms={5}
-                    onUpdate={onUpdate} 
+                    onUpdate={onUpdate}
                     onDelete={onDelete}
                 />
             ) : (

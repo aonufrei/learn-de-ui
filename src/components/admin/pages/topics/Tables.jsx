@@ -1,22 +1,16 @@
 import React from "react"
 import Popup from "reactjs-popup"
 
-import "../../basic/table.css"
-import "../../basic/basic.css"
-
 import TopicModal from "./Modal"
 import { Link } from "react-router-dom"
 
-const TopicsTable = ({ data, colms, onUpdate, onDelete }) => {
+const TopicsTable = ({ data, onUpdate, onDelete }) => {
     return (
-        <div className="t-table">
-            <div
-                className="t-table-row table-header"
-                style={{ gridTemplateColumns: `repeat(${colms}, 1fr)` }}
-            >
+        <div className="grid border divide-y divide-clborder">
+            <div className="grid grid-cols-5 [&>*]:px-1 divide-x divide-clfore bg-clback text-clfore font-bold text-xl">
                 <span>ID</span>
-                <span>Name</span>
-                <span>Description</span>
+                <span className="truncate">Name</span>
+                <span className="truncate">Description</span>
                 <span>Words</span>
                 <span>Action</span>
             </div>
@@ -24,7 +18,6 @@ const TopicsTable = ({ data, colms, onUpdate, onDelete }) => {
                 <TopicRow
                     key={d.id}
                     row={d}
-                    colms={colms}
                     onUpdate={onUpdate}
                     onDelete={onDelete}
                 />
@@ -33,18 +26,15 @@ const TopicsTable = ({ data, colms, onUpdate, onDelete }) => {
     )
 }
 
-const TopicRow = ({ row, colms, onUpdate, onDelete }) => {
+const TopicRow = ({ row, onUpdate, onDelete }) => {
     return (
-        <div
-            className="t-table-row"
-            style={{ gridTemplateColumns: `repeat(${colms}, 1fr)` }}
-        >
+        <div className="grid grid-cols-5 [&>*]:px-1 divide-x divide-clborder text-clback">
             <span>{row.id}</span>
-            <span>{row.name}</span>
-            <span>{row.description}</span>
+            <span className="truncate">{row.name}</span>
+            <span className="truncate">{row.description}</span>
             <span>
                 <Link
-                    className="manage-page__link"
+                    className="underline cursor-pointer"
                     to={`/admin/topic/${row.id}/words`}
                 >
                     See all
@@ -54,7 +44,11 @@ const TopicRow = ({ row, colms, onUpdate, onDelete }) => {
                 <Popup
                     modal
                     nested
-                    trigger={<button className="t-action">Update</button>}
+                    trigger={
+                        <button className="p-0 m-0 underline transition-all duration-300 hover:outline-1 hover:outline-clfont">
+                            Update
+                        </button>
+                    }
                 >
                     {(close) => (
                         <TopicModal
@@ -66,8 +60,11 @@ const TopicRow = ({ row, colms, onUpdate, onDelete }) => {
                         />
                     )}
                 </Popup>
-                <a> / </a>
-                <button className="t-action" onClick={(_) => onDelete(row.id)}>
+                <span> / </span>
+                <button
+                    className="p-0 m-0 underline transition-all duration-300 hover:outline-1 hover:outline-clfont"
+                    onClick={(_) => onDelete(row.id)}
+                >
                     Delete
                 </button>
             </span>

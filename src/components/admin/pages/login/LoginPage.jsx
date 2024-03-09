@@ -4,9 +4,9 @@ import Page from "../../../basic/Page"
 
 import { login } from "../../../../service/APIService"
 
-import "./styles.css"
-import "../../basic/modal.css"
 import { useNavigate } from "react-router-dom"
+
+import { TextInput, ActionButton } from "../../../ui/Inputs"
 
 const LoginPage = () => {
     const navigate = useNavigate()
@@ -29,27 +29,31 @@ const LoginPage = () => {
     return (
         <Page title="Login">
             <div>
-                <div>
-                    <span className="modal-label">Username:</span>
-                    <input
-                        className="modal-input"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <span className="modal-label">Password:</span>
-                    <input
-                        className="modal-input"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                {showError && <p className="login-error-message">Username or password is not correct</p>}
-                <div style={{ marginTop: "20px" }}>
-                    <button className="modal-btn__submit" onClick={onLogin}>
+                <TextInput
+                    label="Username: "
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+
+                <TextInput
+                    className="mb-5"
+                    label="Password: "
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                {showError && (
+                    <p className="text-clfailure">
+                        Username or password is not correct
+                    </p>
+                )}
+                <div className="mt-5">
+                    <ActionButton
+                        className="bg-clbtn text-clfont2"
+                        onClick={onLogin}
+                    >
                         Login
-                    </button>
+                    </ActionButton>
                 </div>
             </div>
         </Page>

@@ -32,7 +32,7 @@ const AdminHeader = () => {
                     <span className="text-clfore text-2xl font-bold">Learn De articles!</span>
                 </Link>
                 <div className="flex flex-row pl-8">
-                    <Link className="text-clfore text-base" to={"/admin/topics"}>
+                    <Link className="text-clfore hover:text-clfore text-base" to={"/admin/topics"}>
                         Manage topics
                     </Link>
                 </div>
