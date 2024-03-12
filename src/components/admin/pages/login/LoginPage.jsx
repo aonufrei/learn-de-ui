@@ -7,6 +7,7 @@ import { login } from "../../../../service/APIService"
 import { useNavigate } from "react-router-dom"
 
 import { TextInput, ActionButton } from "../../../ui/Inputs"
+import { setToken } from "../../../../service/AuthService"
 
 const LoginPage = () => {
     const navigate = useNavigate()
@@ -18,7 +19,7 @@ const LoginPage = () => {
         login(username, password).then((tk) => {
             setShowError(false)
             if (tk !== undefined && tk !== null && tk !== "") {
-                localStorage.setItem("token", tk)
+                setToken(tk)
                 navigate("/admin/topics")
             } else {
                 setShowError(true)

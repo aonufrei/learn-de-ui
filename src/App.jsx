@@ -16,7 +16,9 @@ import WelcomePage from "./components/pages/welcome/WelcomePage"
 import LoginPage from "./components/admin/pages/login/LoginPage"
 import ManageTopicsPage from "./components/admin/pages/topics/ManageTopicsPage"
 import ManageWordsPage from "./components/admin/pages/words/ManageWordsPage"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+
+import { containsToken } from "./service/AuthService"
 
 const AppRouter = () => {
     return (
@@ -47,16 +49,17 @@ const AppRouter = () => {
 
 function App({ isAdmin }) {
     const navigate = useNavigate()
+
     useEffect(() => {
-        if (isAdmin && !localStorage.getItem("token")) {
+        if (isAdmin && !containsToken()) {
             navigate("/admin/login")
         }
     }, [])
 
     return (
         <div className="flex flex-col justify-between min-h-dvh">
-            {isAdmin ? <AdminHeader /> : <Header />}
-            <main className="flex-1 flex flex-col justify-between h-full">
+            {isAdmin ? <AdminHeader isLoggedIn={containsToken()} /> : <Header />}
+            <main className="flex-1 flex flex-col justify-between min-h-full">
                 <Outlet />
             </main>
             <Footer />
