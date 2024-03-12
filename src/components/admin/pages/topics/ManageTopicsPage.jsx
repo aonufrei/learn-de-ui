@@ -70,6 +70,8 @@ const ManageTopicsPage = () => {
             trigger={
                 <TriggerButton />
             }
+            overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
+            closeOnDocumentClick={false}
             modal
             nested
         >
