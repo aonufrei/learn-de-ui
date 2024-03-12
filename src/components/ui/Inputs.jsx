@@ -8,6 +8,7 @@ export const TextInput = ({
     value,
     onChange,
     type,
+    errorMessage,
     readonly,
 }) => {
     return (
@@ -20,6 +21,9 @@ export const TextInput = ({
                 onChange={(e) => onChange(e)}
                 readOnly={!!readonly}
             />
+            <span className="block text-clfailure">{`${
+                errorMessage ?? ""
+            }`}</span>
         </div>
     )
 }

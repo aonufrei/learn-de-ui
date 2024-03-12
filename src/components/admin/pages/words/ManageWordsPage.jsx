@@ -15,7 +15,7 @@ import { useNavigate, useParams } from "react-router-dom"
 
 import ManagePage from "../../basic/ManagePage"
 
-import { ActionButton } from "../../../ui/Inputs"
+import { getToken } from "../../../../service/AuthService"
 
 const ManageWordsPage = () => {
     const navigate = useNavigate()
@@ -37,7 +37,7 @@ const ManageWordsPage = () => {
     const onUnauthorized = () => navigate("/admin/login")
 
     const fetchTopicInfo = () => {
-        const token = localStorage.getItem("token")
+        const token = getToken()
         getTopicInfoById(topicid, token, onUnauthorized).then((r) => {
             if (r !== undefined) {
                 setTopicInfo(r)
@@ -46,7 +46,7 @@ const ManageWordsPage = () => {
     }
 
     const onCreate = (data) => {
-        const token = localStorage.getItem("token")
+        const token = getToken()
         addWordToTopic(parseInt(topicid), data, token, onUnauthorized).then(
             (r) => {
                 if (r !== undefined) {
@@ -57,7 +57,7 @@ const ManageWordsPage = () => {
     }
 
     const onUpdate = (data) => {
-        const token = localStorage.getItem("token")
+        const token = getToken()
         updateWordOfTopic(parseInt(topicid), data, token, onUnauthorized).then(
             (r) => {
                 if (r !== undefined) {
@@ -68,7 +68,7 @@ const ManageWordsPage = () => {
     }
 
     const onDelete = (id) => {
-        const token = localStorage.getItem("token")
+        const token = getToken()
         deleteWord(id, token, onUnauthorized).then((r) => {
             if (r !== undefined) {
                 refreshWords()
@@ -76,13 +76,21 @@ const ManageWordsPage = () => {
         })
     }
 
+    const TriggerButton = React.forwardRef(({ open, ...props }, ref) => {
+        return (
+            <button className="bg-clbtn text-clfont2" ref={ref} {...props}>
+                Add New Word
+            </button>
+        )
+    })
+
     const CreateWordBtn = (
         <Popup
             trigger={
-                <ActionButton className="bg-clbtn text-clfont2">
-                    Add New Word
-                </ActionButton>
+                <TriggerButton />
             }
+            overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
+            closeOnDocumentClick={false}
             modal
             nested
         >

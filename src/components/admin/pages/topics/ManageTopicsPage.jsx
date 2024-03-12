@@ -14,7 +14,7 @@ import TopicsTable from "./Tables"
 import TopicModal from "./Modal"
 
 import ManagePage from "../../basic/ManagePage"
-import { ActionButton } from "../../../ui/Inputs"
+import { getToken } from "../../../../service/AuthService"
 
 const ManageTopicsPage = () => {
     const navigate = useNavigate()
@@ -31,7 +31,7 @@ const ManageTopicsPage = () => {
     const onUnauthorized = () => navigate("/admin/login")
 
     const onCreate = (data) => {
-        const token = localStorage.getItem("token")
+        const token = getToken()
         createTopic(
             { name: data.name, description: data.description },
             token,
@@ -40,7 +40,7 @@ const ManageTopicsPage = () => {
     }
 
     const onUpdate = (data) => {
-        const token = localStorage.getItem("token")
+        const token = getToken()
         updateTopic(
             data.id,
             { name: data.name, description: data.description },
@@ -50,18 +50,25 @@ const ManageTopicsPage = () => {
     }
 
     const onDelete = (id) => {
-        const token = localStorage.getItem("token")
+        const token = getToken()
         deleteTopic(id, token, onUnauthorized).then(
             (isDeleted) => isDeleted && refreshTopics()
         )
     }
 
+    
+    const TriggerButton = React.forwardRef(({ open, ...props }, ref) => {
+        return (
+            <button className="bg-clbtn text-clfont2" ref={ref} {...props}>
+                Add New Topic
+            </button>
+        )
+    })
+
     const CreateTopicButton = (
         <Popup
             trigger={
-                <ActionButton className="bg-clbtn text-clfont2">
-                    Create topic
-                </ActionButton>
+                <TriggerButton />
             }
             modal
             nested

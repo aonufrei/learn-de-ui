@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import { determineArticle } from "../../../../service/APIService"
 import { capitalize } from "../../../../service/utils"
@@ -26,8 +26,38 @@ const articleToOption = (id) => {
 
 const WordModal = ({ data, showId, title, onClose, onSubmit }) => {
     const [text, setText] = useState(data?.text || "")
-    const [article, setArticle] = useState(data?.article || "")
+    const [article, setArticle] = useState(data?.article || articleOptions[0])
     const [translation, setTranslation] = useState(data?.translation || "")
+
+    const [textErrorMessage, setTextErrorMessage] = useState("")
+    const [transErrorMessage, setTransErrorMessage] = useState("")
+
+    useEffect(() => {
+        console.log(article)
+    }, [])
+
+
+    const validateText = (text) => {
+        const v = text.trim()
+        if (v.length === 0) {
+            return "Text is required"
+        }
+        if (v.length > 30) {
+            return "Text cannot be longer that 30 symbols"
+        }
+        return ""
+    }
+
+    const validateTranslation = (translation) => {
+        const v = translation.trim()
+        if (v.length === 0) {
+            return "Translation is required"
+        }
+        if (v.length > 30) {
+            return "Translation cannot be longer that 30 symbols"
+        }
+        return ""
+    }
 
     return (
         <BasicModal
@@ -35,6 +65,16 @@ const WordModal = ({ data, showId, title, onClose, onSubmit }) => {
             submitText={"Save"}
             onCancel={(_) => onClose()}
             onSubmit={(_) => {
+                const textError = validateText(text)
+                const transError = validateTranslation(translation)
+                setTextErrorMessage(textError)
+                setTransErrorMessage(transError)
+                if (textError !== "") {
+                    return
+                }
+                if (transError !== "") {
+                    return
+                }
                 onSubmit({
                     id: data?.id,
                     text: text || "",
@@ -56,10 +96,11 @@ const WordModal = ({ data, showId, title, onClose, onSubmit }) => {
                 label="Text: "
                 value={text}
                 onChange={(e) => setText(e.target.value)}
+                errorMessage={textErrorMessage}
             />
             <SelectInput
                 label={"Article: "}
-                value={articleToOption(data?.article)}
+                value={article}
                 options={articleOptions}
                 onChange={(v) => setArticle(v)}
             />
@@ -67,6 +108,7 @@ const WordModal = ({ data, showId, title, onClose, onSubmit }) => {
                 label="Translation: "
                 value={translation}
                 onChange={(e) => setTranslation(e.target.value)}
+                errorMessage={transErrorMessage}
             />
         </BasicModal>
     )

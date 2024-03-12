@@ -22,6 +22,8 @@ const LoginPage = () => {
                 setToken(tk)
                 navigate("/admin/topics")
             } else {
+                setUsername("")
+                setPassword("")
                 setShowError(true)
             }
         })
