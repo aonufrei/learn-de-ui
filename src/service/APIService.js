@@ -1,6 +1,6 @@
 import { capitalize } from "./utils"
 
-export const SERVER = "http://139-144-67-214.ip.linodeusercontent.com/api/v1"
+export const SERVER = "https://139.144.67.214/api/v1"
 
 export function determineArticle(id) {
     const a = {
