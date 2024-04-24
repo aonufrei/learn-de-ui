@@ -1,4 +1,4 @@
-const SERVER = "http://127.0.0.1:8080/api/v1"
+const SERVER = "http://139-144-67-214.ip.linodeusercontent.com/api/v1"
 
 const onUnauthorizedHandler = (status, onUnauthorized) => {
     if (status === 403) {
