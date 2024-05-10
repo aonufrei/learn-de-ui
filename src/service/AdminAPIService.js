@@ -1,4 +1,6 @@
-const SERVER = "https://139.144.67.214/api/v1"
+import { SERVER_URL }  from "./constants"
+
+const SERVER = `${SERVER_URL}/api/v1`
 
 const onUnauthorizedHandler = (status, onUnauthorized) => {
     if (status === 403) {

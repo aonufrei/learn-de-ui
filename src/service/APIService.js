@@ -1,6 +1,7 @@
 import { capitalize } from "./utils"
+import { SERVER_URL }  from "./constants"
 
-export const SERVER = "https://139.144.67.214/api/v1"
+const SERVER = `${SERVER_URL}/api/v1`
 
 export function determineArticle(id) {
     const a = {
@@ -18,6 +19,22 @@ export function determineArticle(id) {
 export async function getWordsOfTopic(topicId) {
     console.log(`Get words for topic ${topicId}`)
     const url = `${SERVER}/topics/${topicId}/words`
+    const response = await fetch(url, { method: "GET" })
+    if (!response.ok) {
+        return []
+    } 
+    let data = await response.json()
+    data = data.map((d) => ({
+        ...d,
+        correct: d.article,
+        final: capitalize(`${determineArticle(d.article)} ${d.word}`),
+    }))
+    return data
+}
+
+export async function getShuffledWordsOfTopic(topicId, seed) {
+    console.log(`Get words for topic ${topicId}`)
+    const url = `${SERVER}/topics/${topicId}/words/shuffled?seed=${seed}`
     const response = await fetch(url, { method: "GET" })
     if (!response.ok) {
         return []

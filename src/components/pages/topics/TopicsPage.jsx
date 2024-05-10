@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import { getAllTopics } from "../../../service/APIService"
 import Page from "../../basic/Page"
 
+import { getRandomArbitrary } from "../../../service/utils"
+
 const TopicsPage = () => {
     const [topics, setTopics] = useState([])
 
@@ -11,7 +13,7 @@ const TopicsPage = () => {
             .then((r) => {
                 const data = r.map((o) => ({
                     ...o,
-                    url: `/topic/${o.id}/quiz`,
+                    url: `/topic/${o.id}/quiz?seed=${getRandomArbitrary(1000, 8000)}&qe=${0}`,
                 }))
                 data.sort((f, s) => (f.name > s.name ? 1 : -1))
                 setTopics(data)

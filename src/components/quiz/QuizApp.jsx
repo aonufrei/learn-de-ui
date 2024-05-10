@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react"
 import WordCard from "./WordCard"
-import { useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 
-import { getWordsOfTopic } from "../../service/APIService"
+import { getShuffledWordsOfTopic } from "../../service/APIService"
 
 const QuizProvider = () => {
     const { topicid } = useParams()
-    return <QuizApp topicId={topicid} />
+    const location = useLocation()
+    const params = new URLSearchParams(location.search);
+    return <QuizApp topicId={topicid} seed={params.get('seed')} qe={params.get('qe')} />
 }
 
-const QuizApp = ({ topicId }) => {
+const QuizApp = ({ topicId, seed, qe }) => {
     const [ended, setEnded] = useState(false)
     const [selArticle, setSelArticle] = useState(-1)
     const [wIndex, setWIndex] = useState(0)
@@ -19,11 +21,11 @@ const QuizApp = ({ topicId }) => {
     const [words, setWords] = useState([])
 
     useEffect(() => {
-        getWordsOfTopic(topicId).then((w) => {
+        getShuffledWordsOfTopic(topicId, seed).then((w) => {
             setWords(w)
         })
         return () => ""
-    }, [topicId])
+    }, [topicId, seed])
 
     const onOptionSel = (id) => {
         if (ended) return
