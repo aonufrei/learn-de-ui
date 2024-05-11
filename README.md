@@ -1,6 +1,6 @@
 # Learn DE UI
 
-This is the ui part of a Learn DE Project - a online platform to learn german articles with ease.
+This is the ui part of a Learn DE Project - an online platform to learn german articles with ease.
 
 To run the application run
 ```bash
