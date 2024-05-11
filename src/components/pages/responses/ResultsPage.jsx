@@ -6,7 +6,7 @@ import ResultsTable from "../../ResultsTable/ResultsTable"
 const ResultsPage = () => {
     const { state } = useLocation()
     const responses = state.responses
-    const sourceUrl = state.sourceUrl
+    const retryUrl = state.retryUrl
 
     useEffect(() => {
     }, [])
@@ -19,7 +19,7 @@ const ResultsPage = () => {
                 </div>
 
                 <div className="flex sticky text-center justify-center gap-2 bottom-7 mt-8 mb-16">
-                    <Link to={sourceUrl}>
+                    <Link to={retryUrl}>
                         <button className="text-clfore bg-clbtn py-5 px-12 border-none rounded-full transition-all duration-300 hover:scale-[1.1]">
                             Try again
                         </button>

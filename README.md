@@ -1,8 +1,14 @@
-# React + Vite
+# Learn DE UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the ui part of a Learn DE Project - a online platform to learn german articles with ease.
 
-Currently, two official plugins are available:
+To run the application run
+```bash
+npm install
+```
+then
+```bash
+npm run dev
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Don't forget to adjust the server url in the `/src/service/constants.js`. It must correspond to the backend for the application. You can find out more about backend application [here](https://github.com/aonufrei/learn-de).

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import WordCard from "./WordCard"
-import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom"
 
 import { getShuffledWordsOfTopic } from "../../service/APIService"
 
@@ -8,14 +8,15 @@ const QuizProvider = () => {
     const { topicid } = useParams()
     const location = useLocation()
     const params = new URLSearchParams(location.search);
-    return <QuizApp topicId={topicid} seed={params.get('seed')} qe={params.get('qe')} />
+    return <QuizApp topicId={topicid} seed={params.get('seed')} qe={parseInt(params.get('qe'))} />
 }
 
 const QuizApp = ({ topicId, seed, qe }) => {
     const [ended, setEnded] = useState(false)
     const [selArticle, setSelArticle] = useState(-1)
-    const [wIndex, setWIndex] = useState(0)
     const navigate = useNavigate()
+    const location = useLocation()
+    const [searchParams, setSearchParams] = useSearchParams()
 
     const [responses, setResponses] = useState([])
     const [words, setWords] = useState([])
@@ -39,23 +40,23 @@ const QuizApp = ({ topicId, seed, qe }) => {
     const onNextWord = () => {
         setEnded(false)
         setSelArticle(-1)
-        setWIndex(wIndex + 1)
-        if (wIndex >= words.length) {
-            setWIndex(words.length)
+        if (qe >= words.length) {
+            return
         }
+        setSearchParams({seed: seed, qe: qe + 1})
     }
 
     const endGame = () => {
         navigate("/quiz/results", {
             state: {
                 responses: [...responses],
-                sourceUrl: window.location.pathname,
+                retryUrl: `${location.pathname}?seed=${seed}&qe=0`,
             },
         })
     }
 
     const isLastWord = () => {
-        return wIndex === words.length - 1
+        return qe === words.length - 1
     }
 
     const onResponse = (r) => {
@@ -67,9 +68,9 @@ const QuizApp = ({ topicId, seed, qe }) => {
     return (
         <div className="mt-0 sm:mt-7 sm:p-1 flex justify-center items-center flex-col">
             <WordCard
-                wordNumber={wIndex + 1}
+                wordNumber={qe + 1}
                 wordsAmount={words.length}
-                word={words[wIndex]}
+                word={words[qe]}
                 ended={ended}
                 article={selArticle}
                 onOptionSel={onOptionSel}
