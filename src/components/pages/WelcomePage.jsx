@@ -1,4 +1,4 @@
-import Page from "../../basic/Page"
+import Page from "../basic/Page"
 import { Link } from "react-router-dom"
 
 const WelcomePage = () => {

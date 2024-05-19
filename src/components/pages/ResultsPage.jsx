@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
-import Page from "../../basic/Page"
-import ResultsTable from "../../ResultsTable/ResultsTable"
+import Page from "../basic/Page"
+import ResultsTable from "../ui/ResultsTable"
 
 const ResultsPage = () => {
     const { state } = useLocation()

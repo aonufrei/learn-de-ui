@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { getAllTopics } from "../../../service/APIService"
-import Page from "../../basic/Page"
+import { getAllTopics } from "../../service/APIService"
+import Page from "../basic/Page"
 
-import { getRandomArbitrary } from "../../../service/utils"
+import { getRandomArbitrary } from "../../service/utils"
 
 const TopicsPage = () => {
     const [topics, setTopics] = useState([])

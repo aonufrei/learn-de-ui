@@ -1,4 +1,4 @@
-import Page from "../../basic/Page"
+import Page from "../basic/Page"
 
 const NotFoundPage = () => {
     return (
