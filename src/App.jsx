@@ -6,12 +6,12 @@ import {
     Outlet,
     useNavigate,
 } from "react-router-dom"
-import ResultsPage from "./components/pages/responses/ResultsPage"
-import TopicsPage from "./components/pages/topics/TopicsPage"
+import ResultsPage from "./components/pages/ResultsPage"
+import TopicsPage from "./components/pages/TopicsPage"
 import { AdminHeader, Header } from "./components/basic/Header"
 import Footer from "./components/basic/Footer"
-import NotFoundPage from "./components/pages/not-found/NotFoundPage"
-import WelcomePage from "./components/pages/welcome/WelcomePage"
+import NotFoundPage from "./components/pages/NotFoundPage"
+import WelcomePage from "./components/pages/WelcomePage"
 
 import LoginPage from "./components/admin/pages/login/LoginPage"
 import ManageTopicsPage from "./components/admin/pages/topics/ManageTopicsPage"
