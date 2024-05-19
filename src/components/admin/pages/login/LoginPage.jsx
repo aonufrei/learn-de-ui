@@ -2,15 +2,15 @@ import React, { useState } from "react"
 
 import Page from "../../../basic/Page"
 
-import { login } from "../../../../service/APIService"
-
 import { useNavigate } from "react-router-dom"
 
-import { TextInput, ActionButton } from "../../../ui/Inputs"
-import { setToken } from "../../../../service/AuthService"
+import { login } from "../../../../service/APIService"
 
-const LoginPage = () => {
+import { TextInput, ActionButton } from "../../../ui/Inputs"
+
+const LoginPage = ({ onAuthorize }) => {
     const navigate = useNavigate()
+
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [showError, setShowError] = useState(false)
@@ -19,7 +19,7 @@ const LoginPage = () => {
         login(username, password).then((tk) => {
             setShowError(false)
             if (tk !== undefined && tk !== null && tk !== "") {
-                setToken(tk)
+                onAuthorize(tk)
                 navigate("/admin/topics")
             } else {
                 setUsername("")

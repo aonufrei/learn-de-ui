@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import {
     createTopic,
     deleteTopic,
@@ -14,9 +14,11 @@ import TopicsTable from "./Tables"
 import TopicModal from "./Modal"
 
 import ManagePage from "../../basic/ManagePage"
-import { getToken } from "../../../../service/AuthService"
+import { AuthContext } from "../../AuthContext"
+import { setToken } from "../../../../service/AuthService"
 
 const ManageTopicsPage = () => {
+    const accessToken = useContext(AuthContext)
     const navigate = useNavigate()
     const [topics, setTopics] = useState([])
 
@@ -28,35 +30,34 @@ const ManageTopicsPage = () => {
         getAllTopics().then((res) => res === undefined || setTopics(res))
     }
 
-    const onUnauthorized = () => navigate("/admin/login")
+    const onUnauthorized = () => {
+        setToken("")
+        navigate("/login")
+    }
 
     const onCreate = (data) => {
-        const token = getToken()
         createTopic(
             { name: data.name, description: data.description },
-            token,
+            accessToken,
             onUnauthorized
         ).then((_) => refreshTopics())
     }
 
     const onUpdate = (data) => {
-        const token = getToken()
         updateTopic(
             data.id,
             { name: data.name, description: data.description },
-            token,
+            accessToken,
             onUnauthorized
         ).then((_) => refreshTopics())
     }
 
     const onDelete = (id) => {
-        const token = getToken()
-        deleteTopic(id, token, onUnauthorized).then(
+        deleteTopic(id, accessToken, onUnauthorized).then(
             (isDeleted) => isDeleted && refreshTopics()
         )
     }
 
-    
     const TriggerButton = React.forwardRef(({ open, ...props }, ref) => {
         return (
             <button className="bg-clbtn text-clfont2" ref={ref} {...props}>
@@ -67,9 +68,7 @@ const ManageTopicsPage = () => {
 
     const CreateTopicButton = (
         <Popup
-            trigger={
-                <TriggerButton />
-            }
+            trigger={<TriggerButton />}
             overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
             closeOnDocumentClick={false}
             modal

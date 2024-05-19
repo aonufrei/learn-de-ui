@@ -4,7 +4,7 @@ import { useLocation, useNavigate, useParams, useSearchParams } from "react-rout
 
 import { getShuffledWordsOfTopic } from "../../service/APIService"
 
-const QuizProvider = () => {
+const QuizPage = () => {
     const { topicid } = useParams()
     const location = useLocation()
     const params = new URLSearchParams(location.search);
@@ -87,4 +87,4 @@ const QuizApp = ({ topicId, seed, qe }) => {
     )
 }
 
-export { QuizApp, QuizProvider }
+export { QuizApp, QuizPage}

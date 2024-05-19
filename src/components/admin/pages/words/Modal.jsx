@@ -20,10 +20,6 @@ const articleOptions = [
     },
 ]
 
-const articleToOption = (id) => {
-    return articleOptions.find((it) => it.value === id) || undefined
-}
-
 const WordModal = ({ data, showId, title, onClose, onSubmit }) => {
     const [text, setText] = useState(data?.text || "")
     const [article, setArticle] = useState(data?.article || articleOptions[0])

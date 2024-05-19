@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import WordsTable from "./Tables"
 import WordModal from "./Modal"
 import Popup from "reactjs-popup"
@@ -15,9 +15,12 @@ import { useNavigate, useParams } from "react-router-dom"
 
 import ManagePage from "../../basic/ManagePage"
 
-import { getToken } from "../../../../service/AuthService"
+import { setToken } from "../../../../service/AuthService"
+import { AuthContext } from "../../AuthContext"
 
 const ManageWordsPage = () => {
+    const accessToken = useContext(AuthContext)
+
     const navigate = useNavigate()
     const { topicid } = useParams()
     const [words, setWords] = useState([])
@@ -34,11 +37,13 @@ const ManageWordsPage = () => {
         )
     }
 
-    const onUnauthorized = () => navigate("/admin/login")
+    const onUnauthorized = () => {
+        setToken("")
+        navigate("/login")
+    }
 
     const fetchTopicInfo = () => {
-        const token = getToken()
-        getTopicInfoById(topicid, token, onUnauthorized).then((r) => {
+        getTopicInfoById(topicid, accessToken, onUnauthorized).then((r) => {
             if (r !== undefined) {
                 setTopicInfo(r)
             }
@@ -46,30 +51,33 @@ const ManageWordsPage = () => {
     }
 
     const onCreate = (data) => {
-        const token = getToken()
-        addWordToTopic(parseInt(topicid), data, token, onUnauthorized).then(
-            (r) => {
-                if (r !== undefined) {
-                    refreshWords()
-                }
+        addWordToTopic(
+            parseInt(topicid),
+            data,
+            accessToken,
+            onUnauthorized
+        ).then((r) => {
+            if (r !== undefined) {
+                refreshWords()
             }
-        )
+        })
     }
 
     const onUpdate = (data) => {
-        const token = getToken()
-        updateWordOfTopic(parseInt(topicid), data, token, onUnauthorized).then(
-            (r) => {
-                if (r !== undefined) {
-                    refreshWords()
-                }
+        updateWordOfTopic(
+            parseInt(topicid),
+            data,
+            accessToken,
+            onUnauthorized
+        ).then((r) => {
+            if (r !== undefined) {
+                refreshWords()
             }
-        )
+        })
     }
 
     const onDelete = (id) => {
-        const token = getToken()
-        deleteWord(id, token, onUnauthorized).then((r) => {
+        deleteWord(id, accessToken, onUnauthorized).then((r) => {
             if (r !== undefined) {
                 refreshWords()
             }
@@ -86,9 +94,7 @@ const ManageWordsPage = () => {
 
     const CreateWordBtn = (
         <Popup
-            trigger={
-                <TriggerButton />
-            }
+            trigger={<TriggerButton />}
             overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
             closeOnDocumentClick={false}
             modal

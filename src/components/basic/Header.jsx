@@ -26,7 +26,7 @@ const Header = () => {
     )
 }
 
-const AdminHeader = ({isLoggedIn}) => {
+const AdminHeader = ({isAuthorized}) => {
     return (
         <header className="bg-clback grid py-2 px-2 grid-cols-[0_auto_0] md:grid-cols-[auto_768px_auto] xl:grid-cols-[auto_1280px_auto]">
             <span />
@@ -48,9 +48,9 @@ const AdminHeader = ({isLoggedIn}) => {
                     <Link
                         className="text-clfore hover:underline hover:text-clfore text-base"
                         onClick={() => localStorage.setItem("token", "")}
-                        to={"/admin/login"}
+                        to={"/login"}
                     >
-                        {`${isLoggedIn === true ? "Log Out" : ""}`}
+                        {`${isAuthorized === true ? "Log Out" : ""}`}
                     </Link>
                 </div>
             </div>
